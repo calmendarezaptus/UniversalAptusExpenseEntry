@@ -4,7 +4,7 @@ Captura y edición de gastos y reembolsos por proyecto. Mismo stack, componentes
 captura de tiempos (`UniversalAptusTimeEntry`): React + Vite + TypeScript, Tailwind CSS v4,
 shadcn/ui (`new-york`, Radix), lucide, sonner, animate.css y revisión ortográfica con `typo-js`.
 
-Se comunica con la función de Catalyst `time_entry_services`, que reenvía a la API de
+Se comunica con la función de Catalyst `expense_services` (proyecto Gastos), que reenvía a la API de
 ReportesSandbox (los gastos son locales de Aptus; **no se escriben en Zoho Books**).
 
 ## Parámetros de URL
@@ -34,10 +34,10 @@ no duplicar el gasto.
 
 | Variable | Por omisión |
 |---|---|
-| `VITE_TIME_ENTRY_API_BASE_URL` | Función `time_entry_services` del entorno development |
-| `VITE_CALENDAR_URL` | `https://universal-expenses-calendar.onslate.com/` (ajustar a la URL real de la Slate) |
+| `VITE_API_BASE_URL` | URL de `expense_services`. **Transitorio:** mientras no exista, el respaldo es `time_entry_services`, que aún tiene las rutas de gastos |
+| `VITE_CALENDAR_URL` | `https://universal-expenseentry-calendar.onslate.com/` |
 
-En desarrollo todas las llamadas pasan por el proxy de Vite `/api/time-entry`.
+En desarrollo todas las llamadas pasan por el proxy de Vite `/api`.
 
 ## Comandos
 
@@ -47,3 +47,7 @@ npm run dev      # servidor de desarrollo
 npm test         # pruebas de src/lib (node:test)
 npm run build    # compilación para la Slate (dist/)
 ```
+
+## Proyecto
+
+Forma parte del proyecto de Catalyst **Gastos**. Configuración, despliegue y pendientes: `02-gastos/PROYECTO.md` en el repositorio de trabajo `AptusWidgets`.

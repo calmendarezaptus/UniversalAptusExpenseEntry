@@ -6,7 +6,7 @@ import ts from 'typescript'
 // Mismo esquema que tests/time-entry.test.mjs de la captura de tiempos: se transpila el módulo TS.
 const toModule = source => 'data:text/javascript;base64,' + Buffer.from(ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2023, module: ts.ModuleKind.ESNext } }).outputText).toString('base64')
 const api = fs.readFileSync(new URL('../src/lib/api.ts', import.meta.url), 'utf8')
-  .replace('import.meta.env.DEV', 'true').replace('import.meta.env.VITE_TIME_ENTRY_API_BASE_URL', 'undefined').replace('import.meta.env.VITE_CALENDAR_URL', 'undefined')
+  .replace('import.meta.env.DEV', 'true').replace('import.meta.env.VITE_API_BASE_URL', 'undefined').replace('import.meta.env.VITE_CALENDAR_URL', 'undefined')
 const source = fs.readFileSync(new URL('../src/lib/expense.ts', import.meta.url), 'utf8').replace("from './api'", `from '${toModule(api)}'`)
 const { buildExpense, parseAmount, saveExpense, getExpense, lockReason } = await import(toModule(source))
 
@@ -34,8 +34,8 @@ test('crear usa POST y editar usa PATCH al mismo recurso', async () => {
   globalThis.fetch = async (url, options) => { calls.push({ url, options }); return { ok: true, status: 200, json: async () => ({ id: 22, monto: 640.5, moneda: 'MXN' }) } }
   await saveExpense('636939444', buildExpense(input))
   await saveExpense('636939444', buildExpense(input), '22')
-  assert.equal(calls[0].url, '/api/time-entry/636939444/gastos'); assert.equal(calls[0].options.method, 'POST')
-  assert.equal(calls[1].url, '/api/time-entry/636939444/gastos/22'); assert.equal(calls[1].options.method, 'PATCH')
+  assert.equal(calls[0].url, '/api/636939444/gastos'); assert.equal(calls[0].options.method, 'POST')
+  assert.equal(calls[1].url, '/api/636939444/gastos/22'); assert.equal(calls[1].options.method, 'PATCH')
 })
 
 test('red caída o respuesta sin id bloquean el reenvío; un 409 no', async () => {
