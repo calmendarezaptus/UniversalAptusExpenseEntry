@@ -47,6 +47,13 @@ test('red caída o respuesta sin id bloquean el reenvío; un 409 no', async () =
   await assert.rejects(saveExpense('1', buildExpense(input), '22'), e => e.uncertain === false && e.message.startsWith('Ya está en una Prebill'))
 })
 
+test('un 404 sin JSON (ruta no desplegada) no bloquea el reenvío', async () => {
+  globalThis.fetch = async () => ({ ok: false, status: 404, json: async () => { throw new Error('html') } })
+  await assert.rejects(saveExpense('1', buildExpense(input)), e => e.uncertain === false && /HTTP 404/.test(e.message))
+  globalThis.fetch = async () => ({ ok: false, status: 502, json: async () => { throw new Error('html') } })
+  await assert.rejects(saveExpense('1', buildExpense(input)), e => e.uncertain === true)
+})
+
 test('getExpense valida id y forma', async () => {
   await assert.rejects(getExpense('1', 'abc', new AbortController().signal))
   globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => ({ id: 22, monto: '640', fecha: '2026-11-09', proyecto_id: 18 }) })

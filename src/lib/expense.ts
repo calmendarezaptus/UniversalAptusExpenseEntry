@@ -68,6 +68,12 @@ export async function saveExpense(organizationId: string, payload: ExpensePayloa
     throw Object.assign(new Error('Se perdió la respuesta. Revisa el listado de gastos antes de repetir el guardado.'), { uncertain: true }) as Uncertain
   }
   const data = await response.json().catch(() => null)
+  // Un 4xx sin JSON (p. ej. la función desplegada no tiene la ruta) no se procesó: es reintentable.
+  if (!response.ok && !data && response.status >= 400 && response.status < 500) {
+    throw Object.assign(new Error(response.status === 404
+      ? 'La función de Catalyst no tiene la ruta de gastos (HTTP 404). Despliega la versión actual de time_entry_services.'
+      : `El servidor rechazó la petición (HTTP ${response.status}).`), { uncertain: false }) as Uncertain
+  }
   if (!response.ok || !Number.isInteger(data?.id)) {
     const uncertain = data?.outcome_unknown === true || !data?.stage || (response.ok && !Number.isInteger(data?.id))
     throw Object.assign(new Error(`${data?.error || 'No se pudo confirmar el guardado.'}${uncertain ? ' Revisa el listado de gastos antes de repetir el guardado.' : ''}`), { uncertain }) as Uncertain
