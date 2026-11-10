@@ -68,7 +68,15 @@
 
     --radius: 0.5rem;
 
-    /* Base Navy Blue theme (Default) */
+    /* Tema por omisión de Gastos: Turquesa (Tiempos usa Navy Blue) */
+    --theme-from: #115e59;
+    --theme-to: #14b8a6;
+    --theme-light: #f0fdfa;
+    --theme-border: #99f6e4;
+    --theme-text: #115e59;
+  }
+
+  .theme-navy {
     --theme-from: #1e3a8a;
     --theme-to: #3b82f6;
     --theme-light: #eff6ff;

@@ -183,7 +183,7 @@ function App() {
   return (
     <div className="min-h-screen bg-slate-50/50 p-2 sm:p-4 lg:p-8 flex justify-center items-start font-sans w-full">
       <Toaster position="top-center" richColors />
-      <Card className="w-full bg-gradient-to-b from-[#FFFAFA] to-white border border-slate-200 rounded-[20px] overflow-hidden p-3 sm:p-5 lg:p-8 relative animate__animated animate__fadeIn animate__faster">
+      <Card className="w-full bg-gradient-to-b from-[#F7FDFC] to-white border border-slate-200 rounded-[20px] overflow-hidden p-3 sm:p-5 lg:p-8 relative animate__animated animate__fadeIn animate__faster">
 
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-theme-from/5 rounded-full blur-[80px] animate-blob pointer-events-none z-0"></div>
         <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-theme-to/5 rounded-full blur-[100px] animate-blob animation-delay-2000 pointer-events-none z-0"></div>

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 
-// Mismos temas y clave de almacenamiento que la captura de tiempos (UniversalAptusTimeEntry).
+// Mismos temas que la captura de tiempos (UniversalAptusTimeEntry), pero el de omisión es
+// Turquesa para distinguir Gastos de Tiempos; Navy Blue queda como opción.
 export const THEMES = [
-  { id: 'default', name: 'Navy Blue', color: '#1e3a8a' },
+  { id: 'default', name: 'Turquesa', color: '#115e59' },
+  { id: 'theme-navy', name: 'Navy Blue', color: '#1e3a8a' },
   { id: 'theme-coral', name: 'Coral', color: '#F74848' },
   { id: 'theme-emerald', name: 'Esmeralda', color: '#047857' },
   { id: 'theme-purple', name: 'Púrpura', color: '#6b21a8' },
