@@ -34,7 +34,7 @@ no duplicar el gasto.
 
 | Variable | Por omisión |
 |---|---|
-| `VITE_API_BASE_URL` | URL de `expense_services`. **Transitorio:** mientras no exista, el respaldo es `time_entry_services`, que aún tiene las rutas de gastos |
+| `VITE_API_BASE_URL` | `https://expensesforaptusfinancials-730085095.development.catalystserverless.com/server/expense_services` |
 | `VITE_CALENDAR_URL` | `https://universal-expenseentry-calendar.onslate.com/` |
 
 En desarrollo todas las llamadas pasan por el proxy de Vite `/api`.
