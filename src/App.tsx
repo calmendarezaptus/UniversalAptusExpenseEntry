@@ -25,6 +25,7 @@ import {
   buildExpense, formatAmount, getExpense, lockReason, PAGADO_POR_LABEL, saveExpense,
   type Expense, type ExpenseTipo, type PagadoPor,
 } from '@/lib/expense'
+import { MenuButton } from '@/components/MenuButton'
 
 type Modal = { isOpen: boolean; type: StatusModalType; title: string; message: string }
 type Loadable<T> = { rows: T[]; loading: boolean; error: string }
@@ -200,6 +201,7 @@ function App() {
               <div className="flex items-center gap-3">
                 <h1 className="text-2xl font-bold text-slate-900 tracking-tight">{editing ? 'Editar gasto' : 'Registro de Gastos'}</h1>
                 <ThemeMenu theme={theme} setTheme={setTheme} />
+                <MenuButton />
               </div>
               <p className="text-slate-500 text-sm mt-0.5">Captura de gastos y reembolsos por proyecto</p>
             </div>
